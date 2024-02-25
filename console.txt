@@ -29,4 +29,4 @@ link.click();
 // Remove the link from the document
 document.body.removeChild(link);
 
-//This will download the text file with links
+//This will download a text file with links
