@@ -1,0 +1,32 @@
+// Generally emojis are in sources section which you can checkout after opening Inspect Element in the browser
+// Copy and paste this entire code in console after selecting sources folder
+
+// Get all image elements on the page
+const mediaElements = document.querySelectorAll('img');
+
+// Filter out images and GIFs from the desired path
+const filteredMedia = Array.from(mediaElements)
+  .filter(media => media.src.includes('cdn.discordapp.com/emojis'));
+
+// Extract links
+const downloadLinks = filteredMedia.map(media => media.src);
+
+// Create a text file content
+const textContent = downloadLinks.join('\n');
+
+// Create a data URL
+const dataURL = 'data:text/plain;charset=utf-8,' + encodeURIComponent(textContent);
+
+// Create a link element to trigger the download
+const link = document.createElement('a');
+link.href = dataURL;
+link.download = 'downloaded_links.txt';
+
+// Append the link to the document and trigger the download
+document.body.appendChild(link);
+link.click();
+
+// Remove the link from the document
+document.body.removeChild(link);
+
+//This will download the text file with links
